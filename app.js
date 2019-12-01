@@ -83,6 +83,10 @@ app.listen(port, function(){
     console.log('server is running')
 })
  
+app.get('/', function (req, res) {
+  res.render('login')
+})
+
 app.get('/login', function (req, res) {
   res.render('login')
 })
