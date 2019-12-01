@@ -192,6 +192,36 @@ app.post('/register', function(req,res){
   }
 })
 
+app.post('/', function(req,res){
+  if(isUser(req.body.username, req.body.password)){
+    res.redirect('/home')
+    //currentUser = req.body.username
+    // sessionstorage.setItem("username",req.body.username)
+    // console.log(sessionstorage.getItem("username"))
+    //req.session.user = req.body.username
+    //req.session.save()
+    //console.log(req.session.user)
+    //console.log(req.sessionID)
+    //user++
+    let currUser = {'username':req.body.username,'sessionID':req.sessionID}
+    
+    
+    for(let i=0; i<diffUser.length; i++){
+      if(isEqual(diffUser[i].sessionID,req.sessionID)){
+        diffUser.splice(i, 1);
+      }
+    }
+    diffUser.push(currUser)
+
+  }
+  else{
+    //console.log("Please register first")         //alert
+    //res.redirect('/login')
+    res.redirect('/loginunsuccessful')
+    //res.send("Please register first")
+  }
+})
+
 app.post('/login', function(req,res){
   if(isUser(req.body.username, req.body.password)){
     res.redirect('/home')
